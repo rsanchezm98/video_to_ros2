@@ -45,7 +45,7 @@ class VideoPublisher(Node):
                     height = int(frame.shape[0] * self.resize_percent / 100)
                     dim = (width, height)
                     frame = cv2.resize(frame, dim, interpolation = cv2.INTER_AREA)                    
-                    img = self.cv_bridge.cv2_to_imgmsg(frame)
+                    img = self.cv_bridge.cv2_to_imgmsg(frame, "bgr8")
                     img.header.frame_id = self.base_frame
                     img.header.stamp = self.get_clock().now().to_msg()
                     self.pub.publish(img) # this will spend more time when higher image size [up to it does not accomplish the frame rate]
